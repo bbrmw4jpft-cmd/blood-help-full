@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>BloodConnect — Emergency Blood Finder</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<nav class="nav">
+  <div class="container nav-inner">
+    <div class="brand"><span class="logo3d">🩸</span><span>BloodConnect</span></div>
+    <div class="nav-actions">
+      <button id="homeBtn" class="nav-btn">Home</button>
+      <button id="settingsBtn" class="nav-btn">Settings</button>
+    </div>
+  </div>
+</nav>
+
+<header class="hero container">
+  <div class="hero-left">
+    <h1>Find life-saving blood near you — fast.</h1>
+    <p class="muted">Search verified donors by blood group & location. Request emergency delivery with ETA and contact.</p>
+
+    <div class="search-row">
+      <select id="bloodGroup">
+        <option value="">Select blood group</option>
+        <option>A+</option><option>A-</option><option>B+</option><option>B-</option>
+        <option>AB+</option><option>AB-</option><option>O+</option><option>O-</option>
+      </select>
+
+      <input id="pincode" placeholder="Enter pincode (eg. 474001)">
+      <button id="searchBtn" class="primary">Search</button>
+    </div>
+
+    <div class="quick-actions">
+      <button id="emergencyBtn" class="danger">Emergency SOS</button>
+      <button id="regDonorBtn" class="secondary">Register as Donor</button>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="card-3d" id="featureCard" tabindex="0">
+      <div class="card-face front">
+        <h3>Fast matching</h3>
+        <p>Auto-match donors by blood group & proximity. Integrated ETA simulation.</p>
+      </div>
+      <div class="card-face back">
+        <h3>Logistics-ready</h3>
+        <p>Coordinate volunteers & delivery partners to speed up transfers.</p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="container main-grid">
+  <section>
+    <h2>Available donors</h2>
+    <div id="list" class="card-grid">
+      <!-- donor cards inserted here -->
+    </div>
+    <div id="noResults" class="info" style="display:none;">No donors found. Post an emergency request.</div>
+  </section>
+
+  <aside class="side-panel">
+    <h3>Live demo stats</h3>
+    <div class="stat">Donors in DB: <strong id="statDonors">-</strong></div>
+    <div class="stat">Requests (demo): <strong id="statReq">-</strong></div>
+    <h4>How to use</h4>
+    <ol>
+      <li>Select blood group and enter pincode</li>
+      <li>Click Search → choose donor → Request Now</li>
+      <li>Fill emergency form → simulate ETA</li>
+    </ol>
+  </aside>
+</main>
+
+<!-- Modal -->
+<div id="modal" class="modal" style="display:none;">
+  <div class="modal-content">
+    <span id="closeModal" class="close">&times;</span>
+    <h3 id="modalTitle">Emergency Request</h3>
+    <form id="requestForm">
+      <input id="reqName" placeholder="Your name" required>
+      <input id="reqPhone" placeholder="Phone number" required>
+      <input id="reqPincode" placeholder="Pincode" required>
+      <input id="reqBlood" readonly>
+      <div><label><input type="checkbox" id="agree"> I confirm this is an emergency</label></div>
+      <button type="submit" class="primary">Send Request</button>
+    </form>
+    <div id="requestResult" style="display:none;"></div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <div>Prototype built for hackathon. Backend included (Node + SQLite) for local demo.</div>
+    <div>© BloodConnect</div>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

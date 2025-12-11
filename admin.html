@@ -1,0 +1,23 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Admin — BloodConnect Demo</title>
+<link rel="stylesheet" href="styles.css"></head>
+<body>
+<div class="container" style="padding-top:24px">
+  <h1>Admin — BloodConnect (Demo)</h1>
+  <p class="muted">Shows donors and requests from the local SQLite DB (via server).</p>
+  <div id="donors"></div>
+  <h3>Requests</h3>
+  <div id="requests"></div>
+</div>
+<script>
+async function load(){
+  const d = await fetch('/api/donors').then(r=>r.json()).catch(()=>[]);
+  const out = d.map(x=>`<div class="card"><strong>${x.name}</strong> <span class="badge">${x.blood}</span><div class="small">pincode:${x.pincode} phone:${x.phone}</div></div>`).join('');
+  document.getElementById('donors').innerHTML = '<h3>Donors</h3>'+out;
+  const req = await fetch('/api/requests').then(async r=> r.ok ? r.json() : []).catch(()=>[]);
+  const reqOut = (req.length? req.map(x=>`<div class="card"><strong>${x.name}</strong> <div class="small">blood:${x.blood} eta:${x.eta} id:${x.id}</div></div>`).join('') : '<div class="info">No requests yet</div>');
+  document.getElementById('requests').innerHTML = reqOut;
+}
+load();
+</script>
+</body></html>
